@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "config/*": ["config/*"],
+      "data/*": ["data/*"],
+      "helper/*": ["helper/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"]
+    },
+    "target": "ESNext"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

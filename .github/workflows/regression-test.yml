@@ -1,0 +1,45 @@
+name: Run Regression Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    timeout-minutes: 10
+    name: Run Regression Test - ${{ (github.event_name) }}
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        continue-on-error: false
+
+      - name: Installed Dependencies version
+        run: |
+          node -v
+          npm -v
+          google-chrome --version
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install NPM Dependencies
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+
+      - name: Run Test
+        if: always()
+        run: npx playwright test
+
+      - name: Upload Test Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Artifacts
+          path: |
+            target
+            html
+          retention-days: 10
