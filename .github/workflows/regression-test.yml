@@ -6,6 +6,10 @@ on:
 jobs:
   test:
     timeout-minutes: 10
+    env:
+      STANDARD_USERNAME: ${{ vars.STANDARD_USERNAME }}
+      LOCKED_OUT_USERNAME: ${{ vars.LOCKED_OUT_USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     name: Run Regression Test - ${{ (github.event_name) }}
     runs-on: "ubuntu-latest"
 
