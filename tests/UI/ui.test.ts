@@ -51,7 +51,7 @@ test.describe('UI test', async () => {
 
   test(
     'E2E test by adding and removing products',
-    { tag: '@e2e' },
+    { tag: '@smoke' },
     async ({
       commonPage,
       loginPage,

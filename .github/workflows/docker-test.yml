@@ -1,0 +1,48 @@
+name: Playwright Docker Test
+
+on:
+    workflow_dispatch:
+
+jobs:
+    docker-test:
+        timeout-minutes: 10
+        name: 'Run - Playwright Docker Test'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              continue-on-error: false
+
+            - name: Install Docker Compose standalone
+              run: |
+                  sudo mkdir -p ~/.docker/cli-plugins/
+                  sudo curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+                  sudo chmod +x ~/.docker/cli-plugins/docker-compose
+                  docker compose version
+
+            - name: Run Playwright Docker Test
+              if: always()
+              env:
+                STANDARD_USERNAME: ${{ vars.STANDARD_USERNAME }}
+                LOCKED_OUT_USERNAME: ${{ vars.LOCKED_OUT_USERNAME }}
+                PASSWORD: ${{ secrets.PASSWORD }}
+              run: TAG=@test docker compose up --build --abort-on-container-exit
+
+            - name: Upload Test Artifacts
+              uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: Test Artifacts
+                  path: |
+                      docker/target
+                      docker/html
+                  retention-days: 10
+
+            - name: Stop Docker Container
+              if: always()
+              run: docker compose down --remove-orphans
+
+            - name: Clean up Workspace
+              uses: AutoModality/action-clean@v1
+              if: ${{ always() }}

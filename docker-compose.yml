@@ -1,0 +1,13 @@
+version: "3"
+services:
+  automated-browser-tests:
+    build:
+      context: .
+    environment:
+      - TAG=${TAG}
+      - STANDARD_USERNAME=${STANDARD_USERNAME}
+      - LOCKED_OUT_USERNAME=${LOCKED_OUT_USERNAME}
+      - PASSWORD=${PASSWORD}
+    volumes:
+      - ./docker/html:/e2e/html
+      - ./docker/target/:/e2e/target
