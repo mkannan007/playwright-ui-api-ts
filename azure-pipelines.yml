@@ -19,6 +19,7 @@ steps:
       node -v
       npm -v
       google-chrome --version
+    displayName: 'Check Installed dependencies'
 
   - script: npm ci
     displayName: 'npm dependencies install'
@@ -40,6 +41,7 @@ steps:
       cp -r html artifact_directory/
       cp -r target artifact_directory/
     displayName: 'Prepare files for artifact'
+    condition: succeededOrFailed()
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish test Artifact'
