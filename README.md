@@ -24,6 +24,12 @@ Clone the git-hub repository to your local machine,
 
 #### Reference link: https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository/
 
+## Set Env variables
+set the env variables like username, password in .env file 
+            `STANDARD_USERNAME=standard_user`
+            `LOCKED_OUT_USERNAME=locked_out_user`
+            `PASSWORD=secret_sauce`
+
 ## Install Node Module dependencies
 
 Goto Terminal and Run the following commands,
