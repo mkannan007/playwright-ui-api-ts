@@ -56,20 +56,6 @@ export class YourCartPage {
     } else throw new error('Out of Bound Index');
   }
 
-  //   public async removeAllItems(): Promise<void> {
-  //     const itemsLength = await this.page
-  //       .locator(this.locators.inventoryItem)
-  //       .count();
-
-  //     for (let item = 0; item < itemsLength; item += 1) {
-  //       this.page
-  //         .locator(this.locators.inventoryItem)
-  //         .nth(item)
-  //         .getByRole('button', { name: this.locators.remove, exact: true })
-  //         .click();
-  //     }
-  //   }
-
   public async clickContinueShopping(): Promise<void> {
     return this.page.locator(this.locators.continueShopping).click();
   }
